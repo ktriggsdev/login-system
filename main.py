@@ -11,7 +11,7 @@ try:
     df = pd.read_csv(filename)
 except FileNotFoundError:
     df = pd.DataFrame({
-        'username': ['admin', 'user1', 'user2'],
+        'username': ['admin'],
         'password': ['5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', # hash of 'password'
                      'e38ad214943daad1d64c102faec29de4afe9da3d', # hash of 'streamlit'
                      '5e52fee47e6f95708eab44de4c0f3dab9d21b9db'] # hash of 'python'
