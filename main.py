@@ -56,6 +56,14 @@ if mode == 'Login':
         if check_credentials(username, password):
             st.success('Logged in as {}'.format(username))
             # You can add your app logic here
+
+            # Add a button to log out
+            if st.button('Log out'):
+                st.info('Logged out successfully.')
+                # Clear the username and password inputs
+                sidebar.empty()
+                # Reload the page
+                st.experimental_rerun()
         else:
             st.error('Invalid username or password')
 
