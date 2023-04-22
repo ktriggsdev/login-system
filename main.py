@@ -3,14 +3,19 @@ import streamlit as st
 import pandas as pd
 import hashlib
 
-# Create a dataframe to store user credentials
-# You can use your own data source instead
-df = pd.DataFrame({
-    'username': ['admin', 'user1', 'user2'],
-    'password': ['5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', # hash of 'password'
-                 'e38ad214943daad1d64c102faec29de4afe9da3d', # hash of 'streamlit'
-                 '5e52fee47e6f95708eab44de4c0f3dab9d21b9db'] # hash of 'python'
-})
+# Define a filename to store the user credentials
+filename = 'credentials.csv'
+
+# Load the dataframe from the file if it exists, or create a new one
+try:
+    df = pd.read_csv(filename)
+except FileNotFoundError:
+    df = pd.DataFrame({
+        'username': ['admin', 'user1', 'user2'],
+        'password': ['5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', # hash of 'password'
+                     'e38ad214943daad1d64c102faec29de4afe9da3d', # hash of 'streamlit'
+                     '5e52fee47e6f95708eab44de4c0f3dab9d21b9db'] # hash of 'python'
+    })
 
 # Define a function to hash passwords
 def hash_password(password):
@@ -30,6 +35,8 @@ def register_account(username, password):
     else:
         # Append the new credentials to the dataframe
         df.loc[len(df)] = [username, password_hash]
+        # Save the dataframe to the file
+        df.to_csv(filename, index=False)
         return True
 
 # Create a title and a sidebar
