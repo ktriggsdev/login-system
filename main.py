@@ -54,27 +54,27 @@ if mode == 'Login':
     # If the user clicks the login button, check the credentials and display a message
     if sidebar.button('Login'):
         if check_credentials(username, password):
-            st.success('Logged in as {}'.format(username))
+            st.success('Welcome back {}'.format(username))
             # You can add your app logic here
 
             # Add a button to log out
             if st.button('Log out'):
-                st.info('Logged out successfully.')
+                st.info('You have been successfuly logged out! Goodbye.')
                 # Clear the username and password inputs
                 sidebar.empty()
                 # Reload the page
                 st.experimental_rerun()
         else:
-            st.error('Invalid username or password')
+            st.error('Sorry, that isnt a valid username or password. Please try again')
 
 # If the user chooses register, ask them to enter a new username and password in the sidebar
 elif mode == 'Register':
-    new_username = sidebar.text_input('New username')
-    new_password = sidebar.text_input('New password', type='password')
+    new_username = sidebar.text_input('Create a username')
+    new_password = sidebar.text_input('Create a new password', type='password')
 
     # If the user clicks the register button, register a new account and display a message
     if sidebar.button('Register'):
         if register_account(new_username, new_password):
-            st.success('Registered successfully. You can now login with your new credentials.')
+            st.success('Welcome to Carbonvio!. You can now login with your new credentials.')
         else:
-            st.error('Username already taken. Please choose a different one.')
+            st.error('Sorry, that username already taken. Please choose a different one.')
