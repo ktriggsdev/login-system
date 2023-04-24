@@ -77,4 +77,4 @@ elif mode == 'Register':
         if register_account(new_username, new_password):
             st.success('Welcome to Carbonvio!. You can now login with your new credentials.')
         else:
-            st.error('Sorry, that username already taken. Please choose a different one.')
+            st.error('Sorry, that username is already taken. Please choose a different one.')
