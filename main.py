@@ -29,15 +29,13 @@ def check_credentials(username, password):
 # Define a function to register a new account
 def register_account(username, password):
     password_hash = hash_password(password)
-    # Check if the username is already taken
     if username in df['username'].values:
         return False
-    else:
-        # Append the new credentials to the dataframe
-        df.loc[len(df)] = [username, password_hash]
-        # Save the dataframe to the file
-        df.to_csv(filename, index=False)
-        return True
+    # Append the new credentials to the dataframe
+    df.loc[len(df)] = [username, password_hash]
+    # Save the dataframe to the file
+    df.to_csv(filename, index=False)
+    return True
 
 # Create a title and a sidebar
 st.title('Login System')
@@ -54,7 +52,7 @@ if mode == 'Login':
     # If the user clicks the login button, check the credentials and display a message
     if sidebar.button('Login'):
         if check_credentials(username, password):
-            st.success('Logged in as {}'.format(username))
+            st.success(f'Logged in as {username}')
             # You can add your app logic here
 
             # Add a button to log out
@@ -67,7 +65,6 @@ if mode == 'Login':
         else:
             st.error('Invalid username or password')
 
-# If the user chooses register, ask them to enter a new username and password in the sidebar
 elif mode == 'Register':
     new_username = sidebar.text_input('New username')
     new_password = sidebar.text_input('New password', type='password')
